@@ -2,13 +2,20 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-<p align="center">Projeto de estudos do curso de <strong>NestJS</strong> da <a href="https://www.rocketseat.com.br/" target="_blank">Rocketseat</a>.</p>
+<h3 align="center">🚧 Estou aprendendo NestJS — projeto de estudos 🚧</h3>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/status-aprendendo-yellow" alt="status: aprendendo" />
+  <img src="https://img.shields.io/badge/curso-Rocketseat-8257e5" alt="curso Rocketseat" />
+</p>
+
+> ⚠️ **Este projeto não é código de produção.** É o meu repositório de estudos enquanto faço o curso de NestJS da [Rocketseat](https://www.rocketseat.com.br/). Vai ter código sendo refeito, comentários de aula e decisões que ainda estou entendendo — parte do processo de aprender.
 
 ## Sobre
 
-Este é um projeto de aprendizado, desenvolvido enquanto acompanho o curso de NestJS da Rocketseat. Ainda estou aprendendo — o objetivo é praticar conceitos como injeção de dependência, Clean Architecture (domínio, aplicação e infraestrutura separados), autenticação com JWT, validação com Zod e persistência de dados com Prisma + PostgreSQL.
+Este é um projeto de aprendizado, desenvolvido enquanto acompanho o curso de NestJS da Rocketseat. O objetivo é praticar conceitos como injeção de dependência, Clean Architecture (domínio, aplicação e infraestrutura separados), autenticação com JWT, validação com Zod e persistência de dados com Prisma + PostgreSQL.
 
-Anotações e explicações dos conceitos estudados ficam em [anotacoes/](./anotacoes) e em [TUTORIAL.md](./TUTORIAL.md).
+Anotações e explicações dos conceitos estudados ficam em [anotacoes/](./anotacoes) e o passo a passo completo (o que foi feito, em que ordem e por quê) em [TUTORIAL.md](./TUTORIAL.md).
 
 ## Stack
 
