@@ -2,97 +2,86 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<p align="center">Projeto de estudos do curso de <strong>NestJS</strong> da <a href="https://www.rocketseat.com.br/" target="_blank">Rocketseat</a>.</p>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Sobre
 
-## Description
+Este é um projeto de aprendizado, desenvolvido enquanto acompanho o curso de NestJS da Rocketseat. Ainda estou aprendendo — o objetivo é praticar conceitos como injeção de dependência, Clean Architecture (domínio, aplicação e infraestrutura separados), autenticação com JWT, validação com Zod e persistência de dados com Prisma + PostgreSQL.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Anotações e explicações dos conceitos estudados ficam em [anotacoes/](./anotacoes) e em [TUTORIAL.md](./TUTORIAL.md).
 
-## Project setup
+## Stack
 
-```bash
-$ yarn install
-```
+- [NestJS](https://nestjs.com/)
+- [Prisma ORM](https://www.prisma.io/) + PostgreSQL
+- [Zod](https://zod.dev/) para validação
+- JWT (@nestjs/jwt + passport-jwt) para autenticação
+- [Vitest](https://vitest.dev/) para testes unitários e e2e
+- Docker (banco de dados local via docker-compose.yml)
 
-## Compile and run the project
+## O que já foi desenvolvido
 
-```bash
-# development
-$ yarn run start
+- **Configuração inicial** do projeto NestJS (módulos, estrutura de pastas)
+- **Banco de dados**: PostgreSQL via docker-compose, integrado com Prisma ORM
+- **Cadastro de usuário**: rota `POST /accounts`
+- **Validação e segurança**: validação de requisições com Zod (`ZodValidationPipe` reutilizável) e hash de senha com bcryptjs
+- **Autenticação JWT**: `AuthModule` com estratégia JWT (passport-jwt), `JwtAuthGuard` para proteger rotas e decorator `CurrentUser` para extrair o usuário autenticado
+- **Perguntas (Questions)**: API tipo fórum, com rotas protegidas por autenticação
+  - `POST /questions` — cria pergunta vinculada ao usuário logado, gerando slug a partir do título
+  - `GET` — lista perguntas recentes
+- **Clean Architecture**: código separado em três camadas (`core`, `domain` e `infra`), com entidades e use cases de domínio testáveis sem depender do NestJS ou do banco de dados
+- **Testes e2e**: cobertura das rotas com Vitest, usando banco de dados isolado para os testes
+- **Documentação de estudo**: anotações sobre os conceitos aprendidos em [anotacoes/](./anotacoes), começando por injeção de dependência (SOLID), e um roteiro passo a passo em [TUTORIAL.md](./TUTORIAL.md)
 
-# watch mode
-$ yarn run start:dev
+## Como rodar o projeto
 
-# production mode
-$ yarn run start:prod
-```
-
-## Run tests
+### 1. Instalar dependências
 
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+yarn install
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 2. Subir o banco de dados
 
 ```bash
-$ yarn install -g @nestjs/mau
-$ mau deploy
+docker-compose up -d
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 3. Configurar variáveis de ambiente
 
-## Resources
+Copie o `.env` de exemplo (se houver) ou configure `DATABASE_URL`, `JWT_PRIVATE_KEY` e `JWT_PUBLIC_KEY` conforme o `src/infra/env.ts`.
 
-Check out a few resources that may come in handy when working with NestJS:
+### 4. Rodar as migrations do Prisma
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+yarn prisma migrate dev
+```
 
-## Support
+### 5. Iniciar a aplicação
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+# modo desenvolvimento (watch)
+yarn start:dev
 
-## Stay in touch
+# modo produção
+yarn start:prod
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Testes
 
-## License
+```bash
+# testes unitários
+yarn test
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+# testes e2e
+yarn test:e2e
+
+# cobertura de testes
+yarn test:cov
+```
+
+## Recursos do NestJS
+
+- [Documentação oficial](https://docs.nestjs.com)
+- [Cursos oficiais](https://courses.nestjs.com/)
+- [Discord](https://discord.gg/G7Qnnhy)
